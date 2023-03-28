@@ -57,6 +57,12 @@ app.post("/create-tier-list", cpUpload, (req, res) => {
   TierList.create(newTierList);
 });
 
+app.get("/get-tier-lists", async (req, res) => {
+  const allTierLists = await TierList.find();
+
+  res.json(allTierLists);
+});
+
 app.listen(3000, () => {
   [console.log("server running")];
 });
