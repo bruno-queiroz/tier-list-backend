@@ -46,7 +46,9 @@ app.post("/create-tier-list", cpUpload, (req, res) => {
   );
   const tierListItems = (
     req?.files as unknown as FileRequest
-  )?.tierListItems.map((tierListItem) => createImgUrl(tierListItem?.path));
+  )?.tierListItems.map((tierListItem) => ({
+    src: createImgUrl(tierListItem?.path),
+  }));
 
   const newTierList = {
     tierListName,
@@ -61,6 +63,12 @@ app.get("/get-tier-lists", async (req, res) => {
   const allTierLists = await TierList.find();
 
   res.json(allTierLists);
+});
+
+app.get("/get-tier-list/:tierListId", async (req, res) => {
+  const { tierListId } = req.params;
+  const tierList = await TierList.findById({ _id: tierListId });
+  res.json(tierList);
 });
 
 app.listen(3000, () => {
