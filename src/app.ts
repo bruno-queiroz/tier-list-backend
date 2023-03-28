@@ -71,6 +71,14 @@ app.get("/get-tier-list/:tierListId", async (req, res) => {
   res.json(tierList);
 });
 
+app.patch("/update-tier-list/:tierListId", async (req, res) => {
+  const { tierListId } = req.params;
+
+  await TierList.findByIdAndUpdate(tierListId, {
+    tierList: JSON.stringify(req.body),
+  });
+});
+
 app.listen(3000, () => {
   [console.log("server running")];
 });
