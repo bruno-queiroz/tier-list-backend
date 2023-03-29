@@ -79,6 +79,12 @@ app.patch("/update-tier-list/:tierListId", async (req, res) => {
   });
 });
 
+app.patch("/update-tier-list-items/:tierListId", async (req, res) => {
+  const { tierListId } = req.params;
+
+  await TierList.findByIdAndUpdate(tierListId, { tierListItems: req.body });
+});
+
 app.listen(3000, () => {
   [console.log("server running")];
 });
