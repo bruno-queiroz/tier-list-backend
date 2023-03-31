@@ -57,6 +57,8 @@ app.post("/create-tier-list", cpUpload, (req, res) => {
     tierListItems,
   };
   TierList.create(newTierList);
+
+  res.json({ msg: "tierList created" });
 });
 
 app.get("/get-tier-lists", async (req, res) => {
@@ -77,12 +79,16 @@ app.patch("/update-tier-list/:tierListId", async (req, res) => {
   await TierList.findByIdAndUpdate(tierListId, {
     tierList: JSON.stringify(req.body),
   });
+
+  res.json({ msg: "updated" });
 });
 
 app.patch("/update-tier-list-items/:tierListId", async (req, res) => {
   const { tierListId } = req.params;
 
   await TierList.findByIdAndUpdate(tierListId, { tierListItems: req.body });
+
+  res.json({ msg: "updated" });
 });
 
 app.listen(3000, () => {
