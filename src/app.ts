@@ -5,6 +5,7 @@ import { TierList } from "./db/schema";
 import multer, { Multer } from "multer";
 import { storage } from "./multerStorageConfig";
 import { createImgUrl } from "./util/createImgUrl";
+const proxy = require("html2canvas-proxy");
 
 interface MulterFile {
   fieldname: string;
@@ -38,6 +39,7 @@ app.use(express.static("images"));
 app.use(cors(corsOptions));
 app.use(express.json({ limit: "16mb" }));
 app.use(express.urlencoded({ limit: "16mb", extended: true }));
+app.use(proxy());
 
 app.post("/create-tier-list", cpUpload, (req, res) => {
   const { tierListName, tierList } = req.body;
