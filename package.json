@@ -1,6 +1,8 @@
 {
   "scripts": {
-    "dev": "npx nodemon"
+    "dev": "npx nodemon",
+    "build": "npx tsc",
+    "start": "node ./dist/app.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
