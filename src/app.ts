@@ -5,6 +5,8 @@ import { TierList } from "./db/schema";
 import multer, { Multer } from "multer";
 import { storage } from "./multerStorageConfig";
 import { createImgUrl } from "./util/createImgUrl";
+import dotenv from "dotenv";
+dotenv.config();
 const proxy = require("html2canvas-proxy");
 
 interface MulterFile {
