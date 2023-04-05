@@ -6,6 +6,7 @@ import multer, { Multer } from "multer";
 import { storage } from "./multerStorageConfig";
 import { createImgUrl } from "./util/createImgUrl";
 import dotenv from "dotenv";
+import mongoose from "mongoose";
 dotenv.config();
 const proxy = require("html2canvas-proxy");
 
@@ -95,6 +96,8 @@ app.patch("/update-tier-list-items/:tierListId", async (req, res) => {
   res.json({ msg: "updated" });
 });
 
-app.listen(3000, () => {
-  [console.log("server running")];
+mongoose.connection.on("connected", () => {
+  app.listen(3000, () => {
+    [console.log("server running")];
+  });
 });
