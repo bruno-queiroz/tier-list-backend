@@ -1,5 +1,5 @@
 import express from "express";
-import cors from "cors";
+import cors, { CorsOptions } from "cors";
 import { connectToDB } from "./db/access";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
@@ -11,8 +11,19 @@ import { updateTierListItems } from "./controllers/updateTierListItems";
 const proxy = require("html2canvas-proxy");
 dotenv.config();
 
-const corsOptions = {
-  origin: "http://localhost:5173",
+const allowedUrls = [
+  "http://localhost:5173",
+  "https://tier-list-rho.vercel.app",
+];
+
+const corsOptions: CorsOptions = {
+  origin: function (origin, callback) {
+    if (allowedUrls.indexOf(origin || "") !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error("Not Allowed by CORS"));
+    }
+  },
 };
 
 const app = express();
