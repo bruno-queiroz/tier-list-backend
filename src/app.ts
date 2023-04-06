@@ -7,6 +7,7 @@ import mongoose from "mongoose";
 import { createTierList } from "./controllers/createTierList";
 import { getTierLists } from "./controllers/getTierLists";
 import { getSpecificTierList } from "./controllers/getSpecificTierList";
+import { updateTierList } from "./controllers/updateTierList";
 dotenv.config();
 const proxy = require("html2canvas-proxy");
 
@@ -24,16 +25,7 @@ app.use(proxy());
 app.post("/create-tier-list", createTierList);
 app.get("/get-tier-lists", getTierLists);
 app.get("/get-tier-list/:tierListId", getSpecificTierList);
-
-app.patch("/update-tier-list/:tierListId", async (req, res) => {
-  const { tierListId } = req.params;
-
-  await TierList.findByIdAndUpdate(tierListId, {
-    tierList: JSON.stringify(req.body),
-  });
-
-  res.json({ msg: "updated" });
-});
+app.patch("/update-tier-list/:tierListId", updateTierList);
 
 app.patch("/update-tier-list-items/:tierListId", async (req, res) => {
   const { tierListId } = req.params;
