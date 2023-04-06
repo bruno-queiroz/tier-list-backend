@@ -18,24 +18,8 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(proxy());
 
-app.post("/create-tier-list", cpUpload, (req, res) => {
-  const { tierListName, tierList } = req.body;
-  const tierListImage = createImgUrl(
-    (req?.files as unknown as FileRequest)?.tierListImage?.[0]?.path
-  );
-  const tierListItems = (
-    req?.files as unknown as FileRequest
-  )?.tierListItems.map((tierListItem) => ({
-    src: createImgUrl(tierListItem?.path),
-  }));
-
-  const newTierList = {
-    tierListName,
-    tierListImage,
-    tierList,
-    tierListItems,
-  };
-  TierList.create(newTierList);
+app.post("/create-tier-list", (req, res) => {
+  TierList.create(req.body);
 
   res.json({ msg: "tierList created" });
 });
