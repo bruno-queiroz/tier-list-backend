@@ -7,27 +7,6 @@ import mongoose from "mongoose";
 dotenv.config();
 const proxy = require("html2canvas-proxy");
 
-interface MulterFile {
-  fieldname: string;
-  originalname: string;
-  encoding: string;
-  mimetype: string;
-  destination: string;
-  filename: string;
-  path: string;
-  size: number;
-}
-
-interface FileRequest {
-  [key: string]: MulterFile[];
-}
-
-const upload = multer({ storage });
-const cpUpload = upload.fields([
-  { name: "tierListItems" },
-  { name: "tierListImage" },
-]);
-
 const corsOptions = {
   origin: "http://localhost:5173",
 };
