@@ -5,6 +5,7 @@ import { TierList } from "./db/schema";
 import dotenv from "dotenv";
 import mongoose from "mongoose";
 import { createTierList } from "./controllers/createTierList";
+import { getTierLists } from "./controllers/getTierLists";
 dotenv.config();
 const proxy = require("html2canvas-proxy");
 
@@ -20,12 +21,7 @@ app.use(cors(corsOptions));
 app.use(proxy());
 
 app.post("/create-tier-list", createTierList);
-
-app.get("/get-tier-lists", async (req, res) => {
-  const allTierLists = await TierList.find();
-
-  res.json(allTierLists);
-});
+app.get("/get-tier-lists", getTierLists);
 
 app.get("/get-tier-list/:tierListId", async (req, res) => {
   const { tierListId } = req.params;
