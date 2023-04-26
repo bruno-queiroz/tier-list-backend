@@ -4,5 +4,5 @@ import { TierList } from "../db/schema";
 export const createTierList = (req: Request, res: Response) => {
   TierList.create(req.body);
 
-  res.json({ msg: "tierList created" });
+  res.json({ msg: "You Tier List was created !", isOk: true });
 };
