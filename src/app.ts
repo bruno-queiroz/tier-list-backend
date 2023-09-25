@@ -34,11 +34,13 @@ app.use(express.json());
 app.use(cors(corsOptions));
 app.use(proxy());
 
-app.post("/create-tier-list", createTierList);
-app.get("/get-tier-lists", getTierLists);
-app.get("/get-tier-list/:tierListId", getSpecificTierList);
-app.patch("/update-tier-list/:tierListId", updateTierList);
-app.patch("/update-tier-list-items/:tierListId", updateTierListItems);
+app.get("/tier-list", getTierLists);
+app.get("/tier-list/:tierListId", getSpecificTierList);
+
+app.post("/tier-list", createTierList);
+
+app.patch("/tier-list/:tierListId", updateTierList);
+app.patch("/tier-list-items/:tierListId", updateTierListItems);
 
 mongoose.connection.on("connected", () => {
   app.listen(3000, () => {
