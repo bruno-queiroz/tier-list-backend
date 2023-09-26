@@ -8,10 +8,10 @@ export const createTierList = (req: Request, res: Response) => {
 
     TierList.create(req.body);
 
-    res.json({ msg: "You Tier List was created!", isOk: true });
+    res.status(201).json({ msg: "You Tier List was created!", isOk: true });
   } catch (err) {
     console.log(err);
-    res.json({
+    res.status(400).json({
       msg: "Something went wrong creating your Tier List",
       isOk: false,
     });
