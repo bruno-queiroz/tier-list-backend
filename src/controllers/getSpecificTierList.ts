@@ -7,9 +7,11 @@ export const getSpecificTierList = async (req: Request, res: Response) => {
 
     const tierList = await TierList.findById({ _id: tierListId });
 
-    res.json({ data: tierList, msg: "Tier List found", isOk: true });
+    res
+      .status(200)
+      .json({ data: tierList, msg: "Tier List found", isOk: true });
   } catch (err) {
     console.log(err);
-    res.json({ msg: "Tier List not found", isOk: false });
+    res.status(400).json({ msg: "Tier List not found", isOk: false });
   }
 };
