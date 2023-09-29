@@ -2,13 +2,15 @@ import { Request, Response } from "express";
 import { TierList } from "../db/schema";
 import { CreateTierListSchema } from "./schemas/createTierListSchema";
 
-export const createTierList = (req: Request, res: Response) => {
+export const createTierList = async (req: Request, res: Response) => {
   try {
     CreateTierListSchema.parse(req.body);
 
-    TierList.create(req.body);
+    const tierList = await TierList.create(req.body);
 
-    res.status(201).json({ msg: "You Tier List was created!", isOk: true });
+    res
+      .status(201)
+      .json({ data: tierList, msg: "You Tier List was created!", isOk: true });
   } catch (err) {
     console.log(err);
     res.status(400).json({
