@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TierList } from "../db/schema";
-import { UpdateTierListSchema } from "./schemas/updateTierListSchema";
+import { UpdateTierListSchema } from "../validators/updateTierListSchema";
 
 export const updateTierList = async (req: Request, res: Response) => {
   try {

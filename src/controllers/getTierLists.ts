@@ -9,7 +9,8 @@ export const getTierLists = async (req: Request, res: Response) => {
       .status(200)
       .json({ data: allTierLists, msg: "All Tier Lists", isOk: true });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+
     res.status(500).json({ msg: "Something went wrong", isOk: false });
   }
 };

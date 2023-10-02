@@ -1,6 +1,6 @@
 import { Request, Response } from "express";
 import { TierList } from "../db/schema";
-import { CreateTierListSchema } from "./schemas/createTierListSchema";
+import { CreateTierListSchema } from "../validators/createTierListSchema";
 
 export const createTierList = async (req: Request, res: Response) => {
   try {
@@ -12,7 +12,8 @@ export const createTierList = async (req: Request, res: Response) => {
       .status(201)
       .json({ data: tierList, msg: "Your Tier List was created!", isOk: true });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+
     res.status(400).json({
       msg: "Something went wrong creating your Tier List",
       isOk: false,

@@ -11,7 +11,8 @@ export const getSpecificTierList = async (req: Request, res: Response) => {
       .status(200)
       .json({ data: tierList, msg: "Tier List found", isOk: true });
   } catch (err) {
-    console.log(err);
+    console.error(err);
+
     res.status(400).json({ msg: "Tier List not found", isOk: false });
   }
 };
