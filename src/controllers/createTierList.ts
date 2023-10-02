@@ -10,7 +10,7 @@ export const createTierList = async (req: Request, res: Response) => {
 
     res
       .status(201)
-      .json({ data: tierList, msg: "You Tier List was created!", isOk: true });
+      .json({ data: tierList, msg: "Your Tier List was created!", isOk: true });
   } catch (err) {
     console.log(err);
     res.status(400).json({
