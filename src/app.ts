@@ -2,7 +2,6 @@ import express from "express";
 import cors, { CorsOptions } from "cors";
 import { connectToDB } from "./db/access";
 import dotenv from "dotenv";
-import mongoose from "mongoose";
 import { createTierList } from "./controllers/createTierList";
 import { getTierLists } from "./controllers/getTierLists";
 import { getSpecificTierList } from "./controllers/getSpecificTierList";
@@ -19,11 +18,13 @@ const allowedUrls = [
 
 const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    if (allowedUrls.indexOf(origin || "") !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error("Not Allowed by CORS"));
-    }
+    callback(null, true);
+
+    // if (allowedUrls.indexOf(origin || "") !== -1) {
+    //   callback(null, true);
+    // } else {
+    //   callback(new Error("Not Allowed by CORS"));
+    // }
   },
 };
 
@@ -42,8 +43,4 @@ app.post("/tier-list", createTierList);
 app.patch("/tier-list/:tierListId", updateTierList);
 app.patch("/tier-list-items/:tierListId", updateTierListItems);
 
-mongoose.connection.on("connected", () => {
-  app.listen(3000, () => {
-    [console.log("server running")];
-  });
-});
+export default app;
