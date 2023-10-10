@@ -3,7 +3,7 @@
     "test": "jest --coverage",
     "dev": "npx nodemon",
     "build": "tsc",
-    "start": "node ./dist/app.js"
+    "start": "node ./dist/server.js"
   },
   "devDependencies": {
     "@types/cors": "^2.8.13",
