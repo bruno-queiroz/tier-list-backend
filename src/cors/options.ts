@@ -8,8 +8,6 @@ const allowedUrls = [
 
 export const corsOptions: CorsOptions = {
   origin: function (origin, callback) {
-    callback(null, true);
-
     if (allowedUrls.indexOf(origin || "") !== -1) {
       callback(null, true);
     } else {
