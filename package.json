@@ -1,6 +1,6 @@
 {
   "scripts": {
-    "test": "jest --coverage",
+    "test": "jest",
     "dev": "npx nodemon",
     "build": "tsc",
     "start": "node ./dist/server.js"
