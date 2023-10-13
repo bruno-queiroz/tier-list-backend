@@ -8,9 +8,14 @@ export const updateTierList = async (req: Request, res: Response) => {
 
     const tierListValidated = UpdateTierListSchema.parse(req.body);
 
-    await TierList.findByIdAndUpdate(tierListId, tierListValidated);
+    const tierList = await TierList.findByIdAndUpdate(
+      tierListId,
+      tierListValidated
+    );
 
-    res.json({ data: tierListValidated, msg: "Tier List updated", isOk: true });
+    res
+      .status(200)
+      .json({ data: tierList, msg: "Tier List updated", isOk: true });
   } catch (err) {
     console.log(err);
     res.status(400).json({
