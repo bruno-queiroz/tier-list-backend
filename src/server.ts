@@ -1,7 +1,10 @@
 import mongoose from "mongoose";
-import app from "./app";
+import makeApp from "./app";
+import { connectToDB } from "./db/access";
 
 const port = 3000;
+
+const app = makeApp(connectToDB);
 
 mongoose.connection.on("connected", () => {
   app.listen(port, () => {
