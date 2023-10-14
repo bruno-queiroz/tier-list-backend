@@ -6,12 +6,11 @@ export const updateTierListItems = async (req: Request, res: Response) => {
   try {
     const { tierListId } = req.params;
 
-    const tierListItemsValidated = UpdateTierListItemsSchema.parse(req.body);
+    UpdateTierListItemsSchema.parse(req.body);
 
-    const tierListItems = await TierList.findByIdAndUpdate(
-      tierListId,
-      tierListItemsValidated
-    );
+    const tierListItems = await TierList.findByIdAndUpdate(tierListId, {
+      tierListItems: req.body,
+    });
 
     res.status(200).json({
       data: tierListItems,
@@ -19,7 +18,7 @@ export const updateTierListItems = async (req: Request, res: Response) => {
       isOk: true,
     });
   } catch (err) {
-    console.error(err);
+    console.error("Error patching tier list items", err);
 
     res.status(400).json({
       msg: "Something went wrong updating Tier List Items",
