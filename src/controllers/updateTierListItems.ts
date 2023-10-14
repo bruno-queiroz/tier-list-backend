@@ -6,11 +6,18 @@ export const updateTierListItems = async (req: Request, res: Response) => {
   try {
     const { tierListId } = req.params;
 
-    UpdateTierListItemsSchema.parse(req.body);
+    const tierListItemsValidated = UpdateTierListItemsSchema.parse(req.body);
 
-    await TierList.findByIdAndUpdate(tierListId, { tierListItems: req.body });
+    const tierListItems = await TierList.findByIdAndUpdate(
+      tierListId,
+      tierListItemsValidated
+    );
 
-    res.status(200).json({ msg: "Tier List Items updated", isOk: true });
+    res.status(200).json({
+      data: tierListItems,
+      msg: "Tier List Items updated",
+      isOk: true,
+    });
   } catch (err) {
     console.error(err);
 
