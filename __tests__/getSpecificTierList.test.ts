@@ -4,6 +4,7 @@ import { TierList } from "../src/db/schema";
 import { mocked } from "jest-mock";
 
 import makeApp from "../src/app";
+import { allowedUrl } from "./mocks/allowedUrl";
 
 jest.mock("../src/db/schema");
 
@@ -18,7 +19,9 @@ describe("Test app.ts", () => {
     const mockedTierList = mocked(TierList).findById.mockResolvedValue([
       { tierList: [] },
     ]);
-    const res = await request(app).get(`/tier-list/${123}`);
+    const res = await request(app)
+      .get(`/tier-list/${123}`)
+      .set("Origin", allowedUrl);
 
     expect(mockedTierList.mock.calls).toHaveLength(1);
     expect(mockedTierList.mock.calls[0]).toMatchObject([{ _id: "123" }]);
@@ -30,7 +33,9 @@ describe("Test app.ts", () => {
       { msg: "failed to get tierlist" },
     ]);
 
-    const res = await request(app).get(`/tier-list/${567}`);
+    const res = await request(app)
+      .get(`/tier-list/${567}`)
+      .set("Origin", allowedUrl);
 
     expect(mockedTierList.mock.calls).toHaveLength(1);
     expect(mockedTierList.mock.calls[0]).toMatchObject([{ _id: "567" }]);

@@ -4,6 +4,7 @@ import { TierList } from "../src/db/schema";
 import { mocked } from "jest-mock";
 
 import makeApp from "../src/app";
+import { allowedUrl } from "./mocks/allowedUrl";
 
 jest.mock("../src/db/schema");
 
@@ -29,6 +30,7 @@ describe("Test app.ts", () => {
 
     const res = await request(app)
       .patch("/tier-list-items/123")
+      .set("Origin", allowedUrl)
       .send(tierListData);
 
     expect(mockedTierList.mock.calls).toHaveLength(1);
@@ -46,6 +48,7 @@ describe("Test app.ts", () => {
 
     const res = await request(app)
       .patch("/tier-list-items/123")
+      .set("Origin", allowedUrl)
       .send({ fail: "wrong data" });
 
     expect(res.status).toBe(400);
