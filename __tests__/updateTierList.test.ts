@@ -5,16 +5,11 @@ import { mocked } from "jest-mock";
 
 import makeApp from "../src/app";
 import { allowedUrl } from "./mocks/allowedUrl";
+import { tierListData } from "./mocks/tierListData";
 
 jest.mock("../src/db/schema");
 
 const app = makeApp(() => console.log("mock database"));
-
-const tierListData = {
-  tierList: [
-    { color: "#fff", text: "A", tierListSelectedItems: [{ src: "image" }] },
-  ],
-};
 
 describe("Test app.ts", () => {
   afterEach(() => {
